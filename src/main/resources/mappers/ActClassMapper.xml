@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.mvc.Mapper.ActClassDao" >
+    <select id="selectAllActClass" resultType="ActClassBeen">
+        select *
+        from act_class_tab
+        where
+        status = 0
+    </select>
+
+    <select id="selectGradeByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select grade
+        from act_class_tab
+        where
+        name = #{acttype}
+    </select>
+
+    <insert id="addClass" parameterType="ActClassBeen">
+        insert
+        into act_class_tab
+        (keyid,name,grade,creattime,status)
+        values
+        (#{keyid},#{name},#{grade},#{creattime},#{status})
+    </insert>
+
+    <update id="updateClass" parameterType="ActClassBeen">
+        update
+        act_class_tab
+        set name = #{name},grade = #{grade}
+        where keyid = #{keyid}
+    </update>
+
+    <update id="deleteClass" parameterType="ActClassBeen">
+        update
+        act_class_tab
+        set status = 1
+        where keyid = #{keyid}
+    </update>
+</mapper>

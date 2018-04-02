@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.mvc.Mapper.ActCatalogDao" >
+    <select id="selectActive" parameterType="java.util.Map" resultType="ActCatalogBeen">
+        select *
+        from act_catalog_tab
+        where
+        status = 1 and keyid not in (
+            select activekeyid
+            from act_person_tab
+            where stukeyid = #{keyid}
+        )
+        limit #{page},8
+    </select>
+
+    <select id="selectAll" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(id)
+        from act_catalog_tab
+        where
+        status = 1 and keyid not in (
+        select activekeyid
+        from act_person_tab
+        where stukeyid = #{keyid}
+        )
+    </select>
+
+    <select id="selectAllStatus0" resultType="ActCatalogBeen">
+        select a.*,b.name as username,b.telephone as usertel
+        from act_catalog_tab a , sys_user_tab b
+        where
+        a.status = 0 and b.keyid = a.userKeyid
+        order by a.holdtime desc
+    </select>
+
+    <update id="updateStatus" parameterType="ActCatalogBeen">
+        update act_catalog_tab
+        set
+        status = #{status},info05 = #{info05}
+        where
+        keyid = #{keyid}
+    </update>
+</mapper>

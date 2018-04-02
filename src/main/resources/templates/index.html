@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title>Translator</title>
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css"/>
+        <link rel="icon" href="/Users/lyh/Desktop/Test/Translate/system" type="image/x-icon" />
+        <script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+        
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <form action="/insertTest" method="get">
+            <input name="id"/>
+            <input name="text"/>
+            <button type="submit">提交</button>
+        </form>
+
+        <table>
+            <tr >
+                <th>id</th>
+                <th>text</th>
+            </tr>
+            <tr th:each="lis:${list}">
+                <td th:text="${lis.id}"></td>
+                <td th:text="${lis.text}">text</td>
+                <td><a th:href="@{'http://localhost:8888/deleteTest?id='+${lis.id}}">X</a></td>
+            </tr>
+        </table>
+    </body>
+</html>

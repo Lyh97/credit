@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.mvc.Mapper.ActPersonDao" >
+    <insert id="addPerson" parameterType="ActFinishBeen">
+        insert
+        into
+        act_person_tab
+        (keyid,activekeyid,activename,stukeyid,finishtime,activegrade,info02,jointime)
+        values
+        (#{keyid},#{activekeyid},#{activename},#{stukeyid},#{finishtime},#{activegrade},#{info02},#{jointime})
+    </insert>
+
+    <select id="selectActNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(id)
+        from act_person_tab
+        where
+        activekeyid = #{activekeyid}
+    </select>
+
+    <select id="selectEnrollmentTimeBystukeyid" parameterType="java.lang.String" resultType="java.lang.String">
+        select enrollmentTime
+        from sys_user_tab
+        where
+        keyid = #{stukeyid}
+    </select>
+
+    <select id="selectUserNameBykeyid" parameterType="java.lang.String" resultType="java.lang.String">
+        select name
+        from sys_user_tab
+        where
+        keyid = #{keyid}
+    </select>
+
+    <select id="selectActByUserKeyid" parameterType="java.lang.String" resultType="ActFinishBeen">
+        select *
+        from act_person_tab
+        where
+        stukeyid = #{keyid}
+    </select>
+
+    <select id="selectGradeByStuKeyid" parameterType="java.util.Map" resultType="ActFinishBeen">
+        select info02,sum(activegrade) as activegrade
+        from act_person_tab
+        where
+            finishtime is not null and status = 0 and stukeyid = #{keyid}
+        GROUP BY info02
+    </select>
+
+    <select id="selectJoinPersonByActkeyid" parameterType="java.util.Map" resultType="JoinBeen">
+        select a.jointime as jointime , b.name as name , b.sex as sex , b.keyid as stukeyid , a.activekeyid as activekeyid
+        from act_person_tab a,sys_user_tab b
+        where
+        a.activekeyid = #{actkeyid} and a.stukeyid = b.keyid
+    </select>
+
+    <delete id="deleteJoinByStuKeyid" parameterType="java.util.Map">
+        delete
+        from act_person_tab
+        where
+        stukeyid = #{stukeyid} and activekeyid = #{activekeyid}
+    </delete>
+</mapper>

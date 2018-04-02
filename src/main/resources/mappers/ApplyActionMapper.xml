@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="web.mvc.Mapper.ApplyActionDao" >
+    <insert id="applyAction" parameterType="ActCatalogBeen">
+        insert
+        into
+        act_catalog_tab
+        (keyid,name,userKeyid,slogan,creattime,holdtime,finishtime,status,place,acttype,actgrade,member)
+        values
+        (#{keyid},#{name},#{userKeyid},#{slogan},#{creattime},#{holdtime},#{finishtime},#{status},#{place},#{acttype},#{actgrade},#{member})
+    </insert>
+
+    <select id="selectRecordByCondition" resultType="ActCatalogBeen" parameterType="java.util.Map">
+        select *
+        from act_catalog_tab
+        where
+        #{mintime} &lt;= holdtime and holdtime &lt;= #{maxtime} and userKeyid = #{userKeyid}
+        <if test="actName != null and actName != ''">
+            and name = #{actName}
+        </if>
+        order by creattime desc
+        limit #{page},8
+    </select>
+
+    <select id="selectRecordNumber" resultType="ActCatalogBeen" parameterType="java.util.Map">
+        select *
+        from act_catalog_tab
+        where
+        #{mintime} &lt;= holdtime and holdtime &lt;= #{maxtime} and userKeyid = #{userKeyid}
+        <if test="actName != null and actName != ''">
+            and name = #{actName}
+        </if>
+    </select>
+
+    <delete id="deleteApply" parameterType="java.lang.String">
+        delete
+        from act_catalog_tab
+        where
+        keyid = #{keyid}
+    </delete>
+</mapper>
