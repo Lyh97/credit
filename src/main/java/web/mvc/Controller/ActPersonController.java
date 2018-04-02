@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import web.mvc.Been.ActFinishBeen;
 import web.mvc.Been.JoinBeen;
+import web.mvc.Been.UserBeen;
 import web.mvc.Service.ActPersonService;
 
 import javax.annotation.Resource;
@@ -43,6 +44,9 @@ public class ActPersonController {
             long m = sdf.parse(now).getTime() - sdf.parse(enrollmentTime).getTime();
             been.setInfo02("第"+String.valueOf((int)((m / (1000 * 60 * 60 * 24))/182))+"学期");
             been.setStukeyid(been.getStukeyid().replace(" ",""));
+            List<UserBeen> user = service.selectUserBykeyid(been.getStukeyid().replace(" ",""));
+            been.setName(user.get(0).getName());
+            been.setSex(user.get(0).getSex());
             been.setJointime(now);
             try {
                 service.addPerson(been);
@@ -152,6 +156,27 @@ public class ActPersonController {
             return json;
         }
         json.put("code",200);
+        return json;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/stu/selectPersonGrade", method = POST)
+    public JSONObject selectPersonGrade(@RequestBody String info) {
+        JSONObject json = new JSONObject();
+        String name = JSON.parseObject(info).get("stuname").toString();
+        ActFinishBeen be = new ActFinishBeen();
+        be.setName(name);
+        List<ActFinishBeen> list = new ArrayList<ActFinishBeen>();
+        try{
+            list = service.selectPersonGrade(be);
+        } catch(Exception e) {
+            json.put("code",201);
+            System.out.println(e.getMessage());
+            return json;
+        }
+        if(list.size()!=0) Collections.sort(list, list.get(0));
+        json.put("code",200);
+        json.put("data",list);
         return json;
     }
 }

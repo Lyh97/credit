@@ -3,6 +3,7 @@ package web.mvc.Service;
 import org.springframework.stereotype.Service;
 import web.mvc.Been.ActFinishBeen;
 import web.mvc.Been.JoinBeen;
+import web.mvc.Been.UserBeen;
 import web.mvc.Mapper.ActPersonDao;
 
 import javax.annotation.Resource;
@@ -44,5 +45,13 @@ public class ActPersonService {
 
     public void deleteJoinByStuKeyid(Map<Object, String> map) {
         dao.deleteJoinByStuKeyid(map);
+    }
+
+    public List<ActFinishBeen> selectPersonGrade(ActFinishBeen be) {
+        return dao.selectPersonGrade(be);
+    }
+
+    public List<UserBeen> selectUserBykeyid(String keyid) {
+        return dao.selectUserBykeyid(keyid);
     }
 }

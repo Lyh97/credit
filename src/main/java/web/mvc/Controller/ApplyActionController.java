@@ -84,7 +84,7 @@ public class ApplyActionController {
         map.put("maxtime", endtime);
         map.put("actName", JSON.parseObject(search).get("actname").toString());
         map.put("page",(page-1)*8);
-        map.put("userKeyid",JSON.parseObject(search).get("userKeyid").toString());
+        map.put("userKeyid",JSON.parseObject(search).get("userKeyid").toString().replace(" ",""));
         try {
            been = service.selectRecordByCondition(map);
         } catch(Exception e){

@@ -1,10 +1,15 @@
 package web.mvc.Been;
 
-public class ActFinishBeen {
+import java.sql.Timestamp;
+import java.util.Comparator;
+
+public class ActFinishBeen implements Comparator<ActFinishBeen> {
 
     private int id;//id
     private String keyid;//唯一表示id
     private String activekeyid;//活动唯一标识
+    private String name;//用户名
+    private String sex;//用户性别
     private String activename;//活动名称
     private String stukeyid;//学生唯一标识
     private String finishtime; //结束时间
@@ -127,5 +132,30 @@ public class ActFinishBeen {
 
     public void setFinishtime(String finishtime) {
         this.finishtime = finishtime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    @Override
+    public int compare(ActFinishBeen o1, ActFinishBeen o2) {
+        if(o1.getActivegrade()<o2.getActivegrade()){
+            return 1;
+        }else{
+            return -1;
+        }
     }
 }

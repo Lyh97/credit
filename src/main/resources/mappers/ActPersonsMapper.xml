@@ -5,9 +5,9 @@
         insert
         into
         act_person_tab
-        (keyid,activekeyid,activename,stukeyid,finishtime,activegrade,info02,jointime)
+        (keyid,activekeyid,activename,stukeyid,finishtime,activegrade,info02,jointime,name,sex)
         values
-        (#{keyid},#{activekeyid},#{activename},#{stukeyid},#{finishtime},#{activegrade},#{info02},#{jointime})
+        (#{keyid},#{activekeyid},#{activename},#{stukeyid},#{finishtime},#{activegrade},#{info02},#{jointime},#{name},#{sex})
     </insert>
 
     <select id="selectActNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -59,4 +59,21 @@
         where
         stukeyid = #{stukeyid} and activekeyid = #{activekeyid}
     </delete>
+
+    <select id="selectUserBykeyid" parameterType="java.lang.String" resultType="UserBeen">
+        select *
+        from sys_user_tab
+        where
+        keyid = #{keyid}
+    </select>
+
+    <select id="selectPersonGrade" parameterType="ActFinishBeen" resultType="ActFinishBeen">
+        select sum(activegrade) as activegrade ,name,sex
+        from act_person_tab
+        where status = 0 and finishtime is not null
+        <if test="name != '' and name != null">
+            and name = #{name}
+        </if>
+        group by stukeyid,name,sex
+    </select>
 </mapper>

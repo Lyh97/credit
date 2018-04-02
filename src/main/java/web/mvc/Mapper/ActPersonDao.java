@@ -3,6 +3,7 @@ package web.mvc.Mapper;
 import org.springframework.stereotype.Repository;
 import web.mvc.Been.ActFinishBeen;
 import web.mvc.Been.JoinBeen;
+import web.mvc.Been.UserBeen;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,8 @@ public interface ActPersonDao {
     List<JoinBeen> selectJoinPersonByActkeyid(Map<Object, String> map);
 
     void deleteJoinByStuKeyid(Map<Object, String> map);
+
+    List<ActFinishBeen> selectPersonGrade(ActFinishBeen be);
+
+    List<UserBeen> selectUserBykeyid(String keyid);
 }
