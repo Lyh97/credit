@@ -46,7 +46,7 @@
         GROUP BY info02
     </select>
 
-    <select id="selectJoinPersonByActkeyid" parameterType="java.util.Map" resultType="JoinBeen">
+    <select id="selectJoinPersonByActkeyid" parameterType="java.util.Map" resultType="ActFinishBeen">
         select *
         from act_person_tab
         where

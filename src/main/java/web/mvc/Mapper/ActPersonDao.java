@@ -23,7 +23,7 @@ public interface ActPersonDao {
 
     List<ActFinishBeen> selectGradeByStuKeyid(Map<String, Object> map);
 
-    List<JoinBeen> selectJoinPersonByActkeyid(Map<Object, String> map);
+    List<ActFinishBeen> selectJoinPersonByActkeyid(Map<Object, String> map);
 
     void deleteJoinByStuKeyid(Map<Object, String> map);
 

@@ -39,7 +39,7 @@ public class ActPersonService {
         return dao.selectGradeByStuKeyid(map);
     }
 
-    public List<JoinBeen> selectJoinPersonByActkeyid(Map<Object, String> map) {
+    public List<ActFinishBeen> selectJoinPersonByActkeyid(Map<Object, String> map) {
         return dao.selectJoinPersonByActkeyid(map);
     }
 

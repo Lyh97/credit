@@ -10,10 +10,9 @@ import web.mvc.Been.ActCatalogBeen;
 import web.mvc.Service.ActCatalogService;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -63,6 +62,27 @@ public class ActCatalogController {
         ActCatalogBeen been = JSON.parseObject(info,ActCatalogBeen.class);
         try {
             service.updateStatus(been);
+        } catch(Exception e) {
+            json.put("code",201);
+        }
+        json.put("code",200);
+        return json;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/stu/finishApplyByKeyid" , method = POST)
+    public JSONObject finishApplyByKeyid(@RequestBody String info){
+        JSONObject json = new JSONObject();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("keyid",JSON.parseObject(info).get("keyid").toString());
+
+        Date date = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        map.put("date",sf.format(date));
+
+        try {
+            service.updateStatus2(map);
+            service.insertFinishtimeInPerson(map);
         } catch(Exception e) {
             json.put("code",201);
         }

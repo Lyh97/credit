@@ -10,7 +10,7 @@ public interface ActClassDao {
 
     List<ActClassBeen> selectAllActClass();
 
-    int selectGradeByName(String acttype);
+    double selectGradeByName(String acttype);
 
     void addClass(ActClassBeen act);
 

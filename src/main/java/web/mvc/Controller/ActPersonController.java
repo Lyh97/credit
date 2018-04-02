@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import web.mvc.Been.ActFinishBeen;
-import web.mvc.Been.JoinBeen;
 import web.mvc.Been.UserBeen;
 import web.mvc.Service.ActPersonService;
 
@@ -131,7 +130,7 @@ public class ActPersonController {
         Map<Object,String> map = new HashMap<Object, String>();
         map.put("actkeyid",actkeyid);
 
-        List<JoinBeen> datas = service.selectJoinPersonByActkeyid(map);
+        List<ActFinishBeen> datas = service.selectJoinPersonByActkeyid(map);
 
         list.put("code",200);
         list.put("data",datas);

@@ -29,4 +29,12 @@ public class ActCatalogService {
     public void updateStatus(ActCatalogBeen been) {
         dao.updateStatus(been);
     }
+
+    public void updateStatus2(Map<String, Object> map) {
+        dao.updateStatus2(map);
+    }
+
+    public void insertFinishtimeInPerson(Map<String, Object> map) {
+        dao.insertFinishtimeInPerson(map);
+    }
 }

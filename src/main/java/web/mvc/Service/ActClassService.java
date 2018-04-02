@@ -16,7 +16,7 @@ public class ActClassService {
         return dao.selectAllActClass();
     }
 
-    public int selectGradeByName(String acttype) {
+    public double selectGradeByName(String acttype) {
         return dao.selectGradeByName(acttype);
     }
 

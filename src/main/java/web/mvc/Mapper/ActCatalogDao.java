@@ -15,4 +15,8 @@ public interface ActCatalogDao {
     List<ActCatalogBeen> selectAllStatus0();
 
     void updateStatus(ActCatalogBeen been);
+
+    void updateStatus2(Map<String, Object> map);
+
+    void insertFinishtimeInPerson(Map<String, Object> map);
 }

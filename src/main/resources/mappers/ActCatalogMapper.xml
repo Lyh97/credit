@@ -39,4 +39,20 @@
         where
         keyid = #{keyid}
     </update>
+
+    <update id="updateStatus2" parameterType="java.util.Map">
+        update act_catalog_tab
+        set
+        status = 2
+        where
+        keyid = #{keyid}
+    </update>
+
+    <update id="insertFinishtimeInPerson" parameterType="java.util.Map">
+        update act_person_tab
+        set
+        finishtime = #{date}
+        where
+        activekeyid = #{keyid}
+    </update>
 </mapper>

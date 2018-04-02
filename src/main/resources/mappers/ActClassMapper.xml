@@ -8,7 +8,7 @@
         status = 0
     </select>
 
-    <select id="selectGradeByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <select id="selectGradeByName" parameterType="java.lang.String" resultType="java.lang.Double">
         select grade
         from act_class_tab
         where
