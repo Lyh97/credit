@@ -47,10 +47,10 @@
     </select>
 
     <select id="selectJoinPersonByActkeyid" parameterType="java.util.Map" resultType="JoinBeen">
-        select a.jointime as jointime , b.name as name , b.sex as sex , b.keyid as stukeyid , a.activekeyid as activekeyid
-        from act_person_tab a,sys_user_tab b
+        select *
+        from act_person_tab
         where
-        a.activekeyid = #{actkeyid} and a.stukeyid = b.keyid
+        activekeyid = #{actkeyid}
     </select>
 
     <delete id="deleteJoinByStuKeyid" parameterType="java.util.Map">

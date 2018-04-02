@@ -40,4 +40,42 @@ public class UserController {
         json.put("data",list);
         return json;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/stu/deleteUserBykeyid", method = POST)
+    public JSONObject deleteUserBykeyid(@RequestBody String info) {
+        JSONObject json = new JSONObject();
+        List<UserBeen> list = new ArrayList<UserBeen>();
+        Map<String ,Object> map = new HashMap<String ,Object>();
+        map.put("keyid", JSON.parseObject(info).get("keyid").toString());
+        try{
+            service.deleteUserBykeyid(map);
+            service.deleteActCatalogStatus0Bykeyid(map);
+            service.deleteActPersonBykeyid(map);
+        } catch(Exception e) {
+            json.put("code",201);
+            return json;
+        }
+        json.put("code",200);
+        json.put("data",list);
+        return json;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/stu/updateUserBykeyid", method = POST)
+    public JSONObject updateUserBykeyid(@RequestBody String info) {
+        JSONObject json = new JSONObject();
+        List<UserBeen> list = new ArrayList<UserBeen>();
+        UserBeen user = JSON.parseObject(info,UserBeen.class);
+
+        try{
+            service.updateUserBykeyid(user);
+        } catch(Exception e) {
+            json.put("code",201);
+            return json;
+        }
+        json.put("code",200);
+        json.put("data",list);
+        return json;
+    }
 }

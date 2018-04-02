@@ -10,4 +10,12 @@ import java.util.Map;
 public interface UserDao {
 
     List<UserBeen> selectAllUser(Map<String, Object> map);
+
+    void deleteUserBykeyid(Map<String, Object> map);
+
+    void deleteActPersonBykeyid(Map<String, Object> map);
+
+    void deleteActCatalogStatus0Bykeyid(Map<String, Object> map);
+
+    void updateUserBykeyid(UserBeen user);
 }

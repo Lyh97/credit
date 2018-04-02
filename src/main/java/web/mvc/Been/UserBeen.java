@@ -11,8 +11,8 @@ public class UserBeen {
     private String sex;//性别
     private String role;//权限
     private String enrollmentTime;//入学时间
-    private String info01;//预备字段
-    private String info02;
+    private String info01;//学生是否被删除 0；未删除 1：已删除
+    private String info02;//预备字段
     private String info03;
     private String info04;
     private String info05;

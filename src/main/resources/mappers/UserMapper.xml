@@ -5,8 +5,32 @@
     <select id="selectAllUser" parameterType="java.util.Map" resultType="UserBeen">
         select *
         from sys_user_tab
+        where info01 = '0'
         <if test="name != '' and name != null">
-            where name = #{name}
+            and (name = #{name} or username = #{name})
         </if>
     </select>
+
+    <update id="updateUserBykeyid" parameterType="UserBeen">
+        update sys_user_tab
+        set name = #{name},sex=#{sex},telephone = #{telephone},enrollmentTime =#{enrollmentTime}
+        where keyid = #{keyid}
+    </update>
+    <update id="deleteUserBykeyid" parameterType="java.util.Map">
+        update sys_user_tab
+        set info01 = '1'
+        where keyid = #{keyid}
+    </update>
+
+    <delete id="deleteActPersonBykeyid" parameterType="java.util.Map">
+        delete
+        from act_person_tab
+        where stukeyid = #{keyid}
+    </delete>
+
+    <delete id="deleteActCatalogStatus0Bykeyid" parameterType="java.util.Map">
+        delete
+        from act_catalog_tab
+        where userKeyid = #{keyid} and status = 0
+    </delete>
 </mapper>
